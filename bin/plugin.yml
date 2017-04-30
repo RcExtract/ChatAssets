@@ -1,0 +1,25 @@
+name: ChatAssets
+version: 0.1
+description: This plugin collects several mainly used chat related features.
+author: GitHub/RcExtract
+main: me.rcextract.chatassets.Main
+commands:
+    chatassets:
+        usage: /<command>
+        description: Main command of ChatAssets.
+permissions:
+    chatassets.*:
+        default: false
+        children:
+            chatassets.main: true
+            chatassets.help: true
+            chatassets.reload: true
+            chatassets.anticurse.bypass: true
+    chatassets.main:
+        default: true
+    chatassets.help:
+        default: true
+    chatassets.reload:
+        default: op
+    chatassets.anticurse.bypass:
+        default: false

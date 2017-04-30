@@ -1,0 +1,9 @@
+prefix: "ChatAssets "
+send-message-on-action-bar: false
+anticurse:
+  enabled: true
+  cancel-cursed-message: false
+  replaced-string: "*"
+  badwords:
+  - fuck
+  - shit
