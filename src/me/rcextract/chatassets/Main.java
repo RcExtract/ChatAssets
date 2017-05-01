@@ -1,0 +1,17 @@
+package me.rcextract.chatassets;
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin{
+	
+	public void onEnable() {
+		getCommand("chatassets").setExecutor(new Commander(this));
+		Bukkit.getPluginManager().registerEvents(new AntiCurse(this), this);
+		getConfig().options().copyDefaults(true);
+		saveConfig();
+	}
+	public void onDisable() {
+		
+	}
+}
