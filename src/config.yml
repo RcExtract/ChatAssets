@@ -3,8 +3,6 @@ send-message-on-action-bar: false
 anticurse:
     enable:
         chat: true
-        actionbar: true
-        title-and-subtitle: true
     cancel-cursed-message: false
     replaced-string: "*"
     badwords:
