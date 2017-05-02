@@ -1,9 +1,13 @@
 prefix: "ChatAssets "
-send-message-on-action-bar: false
+send-message-on-action-bar: true
+enable:
+    anticurse: true
+    anticasespam: true
 anticurse:
-    enable:
-        chat: true
     cancel-cursed-message: false
     replaced-string: "*"
     badwords:
     - badword
+anticasespam:
+    max-upper-cases: 3
+    all-char-to-lower-case-if-over-max: true

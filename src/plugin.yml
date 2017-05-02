@@ -1,5 +1,5 @@
 name: ChatAssets
-version: 0.1
+version: 0.2
 description: This plugin collects several mainly used chat related features.
 author: GitHub/RcExtract
 main: me.rcextract.chatassets.Main
@@ -15,6 +15,7 @@ permissions:
             chatassets.help: true
             chatassets.reload: true
             chatassets.anticurse.bypass: true
+            chatassets.anticasespam.bypass: true
     chatassets.main:
         default: true
     chatassets.help:
@@ -22,4 +23,6 @@ permissions:
     chatassets.reload:
         default: op
     chatassets.anticurse.bypass:
+        default: false
+    chatassets.anticasespam.bypass:
         default: false

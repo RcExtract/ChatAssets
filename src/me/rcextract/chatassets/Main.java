@@ -8,6 +8,7 @@ public class Main extends JavaPlugin{
 	public void onEnable() {
 		getCommand("chatassets").setExecutor(new Commander(this));
 		Bukkit.getPluginManager().registerEvents(new AntiCurse(this), this);
+		Bukkit.getPluginManager().registerEvents(new AntiCaseSpam(this), this);
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 	}

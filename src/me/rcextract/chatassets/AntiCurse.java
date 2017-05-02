@@ -26,7 +26,7 @@ public class AntiCurse implements Listener {
 		String replacedstring = plugin.getConfig().getString("anticurse.replaced-string");
 		String finalmessage;
 		int index = 0;
-		Boolean enablation = plugin.getConfig().getBoolean("anticurse.enable.chat");
+		Boolean enablation = plugin.getConfig().getBoolean("enable.anticurse");
 		Boolean cancelcursedmessage = plugin.getConfig().getBoolean("anticurse.cancel-cursed-message");
 		List<String> messagewords = new ArrayList<String>();
 		List<String> badwordsconfig = plugin.getConfig().getStringList("anticurse.badwords");
@@ -52,9 +52,13 @@ public class AntiCurse implements Listener {
 								event.setCancelled(true);
 								sendMessage(ChatColor.YELLOW + "Your curse is fully blocked.", prefix, player);
 							}
+						} else {
+							
 						}
 					}
 				}
+			} else {
+				
 			}
 		} else {
 
