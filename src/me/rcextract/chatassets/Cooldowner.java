@@ -11,8 +11,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
-
 public class Cooldowner implements Listener {
 
 	private Plugin plugin;
@@ -31,7 +29,7 @@ public class Cooldowner implements Listener {
 			if (cooldownplayer.contains(player)) {
 				if (!(player.hasPermission("chatassets.cooldowner.bypass"))) {
 					event.setCancelled(true);
-					sendMessage(cooldownerror, prefix, player);
+					Main.sendMessage(cooldownerror, prefix, player);
 				} else {
 					cooldownplayer.remove(player);
 				}
@@ -51,14 +49,6 @@ public class Cooldowner implements Listener {
 			}
 		} else {
 			
-		}
-	}
-	private void sendMessage(String message, String prefix, Player player) {
-		Boolean sendmessageonactionbar = plugin.getConfig().getBoolean("send-message-on-action-bar");
-		if (sendmessageonactionbar == false || sendmessageonactionbar == null) {
-			player.sendMessage(prefix + message);
-		} else {
-			ActionBarAPI.sendActionBar(player, message);
 		}
 	}
 }

@@ -10,8 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
 
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
-
 public class MessageShortener implements Listener {
 
 	private Plugin plugin;
@@ -35,7 +33,7 @@ public class MessageShortener implements Listener {
 			plugin.getConfig().set("message-shortener.totalmessages", totalmessages + 1);;
 			plugin.saveConfig();
 			plugin.reloadConfig();
-			sendMessage(ChatColor.GREEN + "You have successfully added a new shorten message!", prefix, player);
+			Main.sendMessage(ChatColor.GREEN + "You have successfully added a new shorten message!", prefix, player);
 		} else {
 			int index = 0;
 			String replacedstring = new String();
@@ -55,7 +53,7 @@ public class MessageShortener implements Listener {
 					if (x.contains(y)) {
 						if (!(player.hasPermission("chatassets.messageshortener.use"))) {
 							event.setCancelled(true);
-							sendMessage(nopermerror, prefix, player);
+							Main.sendMessage(nopermerror, prefix, player);
 						} else {
 							for (int i = 1; i <= totalmessages; i++) {
 								if (y.equals(plugin.getConfig().getString("message-shortener.messages." + Integer.toString(i) + ".key"))) {
@@ -67,21 +65,13 @@ public class MessageShortener implements Listener {
 							x = messagewords.get(index);
 							finalmessage = String.join(" ", messagewords);
 							event.setMessage(finalmessage);
-							sendMessage(ChatColor.YELLOW + "Your key has been successfully replaced with the corrosponding string.", prefix, player);
+							Main.sendMessage(ChatColor.YELLOW + "Your key has been successfully replaced with the corrosponding string.", prefix, player);
 						}
 					} else {
 						
 					}
 				}
 			}
-		}
-	}
-	private void sendMessage(String message, String prefix, Player player) {
-		Boolean sendmessageonactionbar = plugin.getConfig().getBoolean("send-message-on-action-bar");
-		if (sendmessageonactionbar == false || sendmessageonactionbar == null) {
-			player.sendMessage(prefix + message);
-		} else {
-			ActionBarAPI.sendActionBar(player, message);
 		}
 	}
 }

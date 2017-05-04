@@ -9,8 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
-
 public class Commander implements CommandExecutor {
 
 	private Main plugin;
@@ -32,30 +30,30 @@ public class Commander implements CommandExecutor {
 			}
 			Player player = (Player) sender;
 			if (!(player.hasPermission("chatassets.main"))) {
-				sendMessage(nopermerror, prefix, player);
+				Main.sendMessage(nopermerror, prefix, player);
 				return true;
 			}
 			if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
 				if (!(player.hasPermission("chatassets.help"))) {
-					sendMessage(nopermerror, prefix, player);
+					Main.sendMessage(nopermerror, prefix, player);
 					return true;
 				}
 				if (args.length > 1) {
-					sendMessage(toomanyargserror, prefix, player);
+					Main.sendMessage(toomanyargserror, prefix, player);
 					return true;
 				}
-				sendMessage(ChatColor.YELLOW + "This help section is taken from the bukkit help.", prefix, player);
-				sendMessage(ChatColor.YELLOW + "Customized help section is coming soon.", prefix, player);
+				Main.sendMessage(ChatColor.YELLOW + "This help section is taken from the bukkit help.", prefix, player);
+				Main.sendMessage(ChatColor.YELLOW + "Customized help section is coming soon.", prefix, player);
 				player.performCommand("help ChatAssets");
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("reload")) {
 				if (!(player.hasPermission("chatassets.reload"))) {
-					sendMessage(nopermerror, prefix, player);
+					Main.sendMessage(nopermerror, prefix, player);
 					return true;
 				}
 					plugin.reloadConfig();
-					sendMessage(ChatColor.GREEN + "Configuration file is reloaded successfully!", prefix, player);
+					Main.sendMessage(ChatColor.GREEN + "Configuration file is reloaded successfully!", prefix, player);
 					return true;
 			}
 			if (args[0].equalsIgnoreCase("messageshortener")) {
@@ -68,15 +66,15 @@ public class Commander implements CommandExecutor {
 				}
 				if (args.length == 1 || args[1].equalsIgnoreCase("list")) {
 					if (!(player.hasPermission("chatassets.messageshortener.view"))) {
-						sendMessage(nopermerror, prefix, player);
+						Main.sendMessage(nopermerror, prefix, player);
 						return true;
 					}
 					if (args.length > 2) {
-						sendMessage(toomanyargserror, prefix, player);
+						Main.sendMessage(toomanyargserror, prefix, player);
 						return true;
 					}
 					if (replacestring.size() == 0 && replacedstring.size() == 0) {
-						sendMessage(ChatColor.RED + "No shorten message exists!", prefix, player);
+						Main.sendMessage(ChatColor.RED + "No shorten message exists!", prefix, player);
 						return true;
 					}
 					for (int i = 0; i < replacestring.size() && i < replacedstring.size(); i++) {
@@ -86,23 +84,23 @@ public class Commander implements CommandExecutor {
 				}
 				if (args[1].equalsIgnoreCase("add")) {
 					if (!(player.hasPermission("chatassets.messageshortener.add"))) {
-						sendMessage(nopermerror, prefix, player);
+						Main.sendMessage(nopermerror, prefix, player);
 						return true;
 					}
 					if (args.length < 3) {
-						sendMessage(ChatColor.RED + "Please specify a key!", prefix, player);
+						Main.sendMessage(ChatColor.RED + "Please specify a key!", prefix, player);
 						return true;
 					}
 					if (args.length > 3) {
-						sendMessage(toomanyargserror, prefix, player);
+						Main.sendMessage(toomanyargserror, prefix, player);
 						return true;
 					}
 					if (replacestring.contains(args[2])) {
-						sendMessage(ChatColor.RED + "Key is registered!", prefix, player);
+						Main.sendMessage(ChatColor.RED + "Key is registered!", prefix, player);
 						return true;
 					}
 					addshortenmessagelist.add(player);
-					sendMessage(ChatColor.YELLOW + "Please enter the message that will replace the key.", prefix, player);
+					Main.sendMessage(ChatColor.YELLOW + "Please enter the message that will replace the key.", prefix, player);
 					addshortenmessagekey = args[2];
 					return true;
 				}
@@ -110,13 +108,5 @@ public class Commander implements CommandExecutor {
 			return true;
 		}
 		return false;
-	}
-	private void sendMessage(String message, String prefix, Player player) {
-		Boolean sendmessageonactionbar = plugin.getConfig().getBoolean("send-message-on-action-bar");
-		if (sendmessageonactionbar == false || sendmessageonactionbar == null) {
-			player.sendMessage(prefix + message);
-		} else {
-			ActionBarAPI.sendActionBar(player, message);
-		}
 	}
 }
