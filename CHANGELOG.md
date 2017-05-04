@@ -20,9 +20,15 @@ Fixed several bugs and changed config.yml settings.
   - Older versions doesn't support "a<badword>b" replacement, only support "a <badword> b". Now supported.
   - Fixed bug that occured when two badwords are sticked together.
 ## Update 0.2.0
-AntiCaseSpam is added. Starts to depend on ActionBarAPI
+AntiCaseSpam is added. Starts to depend on ActionBarAPI.
 - Added AntiCaseSpam.java
 - Added ActionBarAPI dependency
-  - Added dependency
-  - Can choose to display messages on chat or action bar
+  - Added dependency.
+  - Can choose to display messages on chat or action bar.
 - Changed config.yml
+## Update 0.3.0
+Message Shortener is added. Fixed several bugs and compabilities between each functions.
+- Added MessageShortener.java
+- Added options for message shortener into config.yml
+- Added sub-command messageshortener.
+  - Added sub-sub-command add. Usage: /chatassets messageshortener add <key>.
