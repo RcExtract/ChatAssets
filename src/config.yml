@@ -3,6 +3,7 @@ send-message-on-action-bar: true
 enable:
     anticurse: true
     anticasespam: true
+    cooldowner: true
 anticurse:
     cancel-cursed-message: false
     replaced-string: "*"
@@ -11,3 +12,11 @@ anticurse:
 anticasespam:
     max-upper-cases: 3
     all-char-to-lower-case-if-over-max: true
+cooldowner:
+    secs-before-next-message: 5
+message-shortener:
+    totalmessages: 1
+    messages:
+        '1':
+            key: "shortkey"
+            message: "longmessage"
