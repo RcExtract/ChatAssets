@@ -32,3 +32,4 @@ Message Shortener is added. Fixed several bugs and compabilities between each fu
 - Added options for message shortener into config.yml
 - Added sub-command messageshortener.
   - Added sub-sub-command add. Usage: /chatassets messageshortener add <key>.
+  - Message can be typed not as an argument behind the key.
