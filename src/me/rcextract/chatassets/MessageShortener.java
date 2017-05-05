@@ -34,6 +34,8 @@ public class MessageShortener implements Listener {
 			plugin.saveConfig();
 			plugin.reloadConfig();
 			Main.sendMessage(ChatColor.GREEN + "You have successfully added a new shorten message!", prefix, player);
+			Main.sendMessage("Key: " + addkey, prefix, player);
+			Main.sendMessage("Message: " + addmessage, prefix, player);
 		} else {
 			int index = 0;
 			String replacedstring = new String();

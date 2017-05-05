@@ -104,6 +104,36 @@ public class Commander implements CommandExecutor {
 					addshortenmessagekey = args[2];
 					return true;
 				}
+				if (args[1].equalsIgnoreCase("remove")) {
+					if (!(player.hasPermission("chatassets.messageshortener.remove"))) {
+						Main.sendMessage(nopermerror, prefix, player);
+						return true;
+					}
+					if (args.length < 3) {
+						Main.sendMessage(ChatColor.RED + "Please specify a key!", prefix, player);
+						return true;
+					}
+					if (args.length > 3) {
+						Main.sendMessage(toomanyargserror, prefix, player);
+						return true;
+					}
+					if (!(replacestring.contains(args[2]))) {
+						Main.sendMessage(ChatColor.RED + "Key is not registered!", prefix, player);
+						return true;
+					}
+					String removeindex = "0";
+					for (int i = 1; i <= totalmessages; i++) {
+						if (args[2].equals(plugin.getConfig().getString("message-shortener.messages." + Integer.toString(i) + ".key"))) {
+							removeindex = Integer.toString(i);
+						}
+					}
+					plugin.getConfig().set("message-shortener.messages." + removeindex + ".key", null);
+					plugin.getConfig().set("message-shortener.messages." + removeindex + ".message", null);
+					plugin.getConfig().set("message-shortener.messages." + removeindex, null);
+					plugin.saveConfig();
+					plugin.reloadConfig();
+					Main.sendMessage(ChatColor.GREEN + "You have successfully removed a shorten message!", prefix, player);
+				}
 			}
 			return true;
 		}
