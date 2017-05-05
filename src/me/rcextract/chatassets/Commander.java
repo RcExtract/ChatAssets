@@ -133,7 +133,9 @@ public class Commander implements CommandExecutor {
 					plugin.saveConfig();
 					plugin.reloadConfig();
 					Main.sendMessage(ChatColor.GREEN + "You have successfully removed a shorten message!", prefix, player);
+					return true;
 				}
+				return true;
 			}
 			return true;
 		}

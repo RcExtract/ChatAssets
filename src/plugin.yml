@@ -18,6 +18,7 @@ permissions:
             chatassets.anticasespam.bypass: true
             chatassets.cooldowner.bypass: true
             chatassets.messageshortener.add: true
+            chatassets.messageshortener.remove: true
             chatassets.messageshortener.use: true
     chatassets.main:
         default: true
@@ -32,6 +33,8 @@ permissions:
     chatassets.cooldowner.bypass:
         default: op
     chatassets.messageshortener.add:
+        default: op
+    chatassets.messageshortener.remove:
         default: op
     chatassets.messageshortener.use:
         default: true
