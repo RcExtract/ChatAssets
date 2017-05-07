@@ -45,7 +45,7 @@ public class AntiCaseSpam implements Listener {
 								event.setCancelled(true);
 								Main.sendMessage(nopermerror, prefix, player);
 							} else {
-								event.setMessage(message.toLowerCase());
+								event.setMessage(Main.colorcode(message.toLowerCase()));
 								Main.sendMessage(ChatColor.YELLOW + "Your message has been lower cased because the amount of upper cases is over the maximum amount.", prefix, player);
 							}
 						} else {

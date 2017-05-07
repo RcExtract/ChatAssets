@@ -47,7 +47,7 @@ public class AntiCurse implements Listener {
 									messagewords.set(index, x.replaceAll(y, y.replaceAll("[a-zA-Z]", replacedstring)));
 									x = messagewords.get(index);
 									finalmessage = String.join(" ", messagewords);
-									event.setMessage(finalmessage);
+									event.setMessage(Main.colorcode(finalmessage));
 									Main.sendMessage(ChatColor.YELLOW + "Your curse is partially blocked.", prefix, player);
 								} else {
 									event.setCancelled(true);

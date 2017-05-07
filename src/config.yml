@@ -4,6 +4,7 @@ enable:
     anticurse: true
     anticasespam: true
     cooldowner: true
+    chatautomodifier: true
 anticurse:
     cancel-cursed-message: false
     replaced-string: "*"

@@ -3,10 +3,17 @@ version: 0.2
 description: This plugin collects several mainly used chat related features.
 author: GitHub/RcExtract
 main: me.rcextract.chatassets.Main
+softdepend: [ActionBarAPI]
 commands:
     chatassets:
         usage: /<command>
         description: Main command of ChatAssets.
+    msg:
+        usage: /<command>
+        description: Message a player privately.
+    reply:
+        usage: /<command>
+        description: Reply to a player.
 permissions:
     chatassets.*:
         default: false
@@ -20,6 +27,11 @@ permissions:
             chatassets.messageshortener.add: true
             chatassets.messageshortener.remove: true
             chatassets.messageshortener.use: true
+            chatassets.antiadvertising.bypass: true
+            chatassets.basic.chat: true
+            chatassets.basic.automodify.bypass: true
+            chatassets.msg: true
+            chatassets.msg.reply: true
     chatassets.main:
         default: true
     chatassets.help:
@@ -37,4 +49,14 @@ permissions:
     chatassets.messageshortener.remove:
         default: op
     chatassets.messageshortener.use:
+        default: true
+    chatassets.antiadvertising.bypass:
+        default: false
+    chatassets.basic.chat:
+        default: true
+    chatassets.basic.automodify.bypass:
+        default: op
+    chatassets.msg:
+        default: true
+    chatassets.msg.reply:
         default: true

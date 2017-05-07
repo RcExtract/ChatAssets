@@ -34,8 +34,8 @@ public class MessageShortener implements Listener {
 			plugin.saveConfig();
 			plugin.reloadConfig();
 			Main.sendMessage(ChatColor.GREEN + "You have successfully added a new shorten message!", prefix, player);
-			Main.sendMessage("Key: " + addkey, prefix, player);
-			Main.sendMessage("Message: " + addmessage, prefix, player);
+			Main.sendMessage("Key: " + Main.colorcode(addkey), prefix, player);
+			Main.sendMessage("Message: " + Main.colorcode(addmessage), prefix, player);
 		} else {
 			int index = 0;
 			String replacedstring = new String();
@@ -66,7 +66,7 @@ public class MessageShortener implements Listener {
 							messagewords.set(index, x.replaceAll(y, replacedstring));
 							x = messagewords.get(index);
 							finalmessage = String.join(" ", messagewords);
-							event.setMessage(finalmessage);
+							event.setMessage(Main.colorcode(finalmessage));
 							Main.sendMessage(ChatColor.YELLOW + "Your key has been successfully replaced with the corrosponding string.", prefix, player);
 						}
 					} else {
