@@ -41,3 +41,17 @@ Command for removing shorten messages is added.
   - Added sub-sub-command remove. Usage: /chatassets messageshortener remove <key>.
 ## Update 0.3.3
 Fixed several bugs and compabilities between each functions.
+## Update 1.0
+Added a lot of things, especially chat auto modifier, msg and reply.
+- Changed Main.java
+  - Added support for color codes
+- Changed Command UI
+  - msg. Usage: /msg <player> <message>
+  - reply. Usage: /reply <message>
+    - msg command must be executed successfully before using this command before sender or receiver quitting.
+- Added ChatAutoModifier.java
+  - Adds spaces between each sentences.
+  - Adds a full stop at the end of the message if not ended with '.', '?' or '!'.
+- Added QuitHandler.java
+  - Handles part of the reply command.
+- Changed config.yml
