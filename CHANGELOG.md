@@ -33,3 +33,11 @@ Message Shortener is added. Fixed several bugs and compabilities between each fu
 - Added sub-command messageshortener.
   - Added sub-sub-command add. Usage: /chatassets messageshortener add <key>.
   - Message can be typed not as an argument behind the key.
+## Update 0.3.1
+Fixed several bugs and compabilities between each functions.
+## Update 0.3.2
+Command for removing shorten messages is added.
+- Changed Commander.java
+  - Added sub-sub-command remove. Usage: /chatassets messageshortener remove <key>.
+## Update 0.3.3
+Fixed several bugs and compabilities between each functions.
