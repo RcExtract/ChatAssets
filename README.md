@@ -6,3 +6,9 @@ The anticurse function in this plugin doesn't simply block a cursing message. In
 The anticasespam function simply treat messages that have amount of capitalized characters over the limit by blocking the message, or lower case the message.
 ## MessageShortener
 The message shortener allows you to create keys that will be replaced with a corresponding message when typed in a chat message. When creating a shorten message, the message used to replace the key can have a maximum length of 100 characters.
+## ChatAutoModifier
+The chat auto modifier convinces the message sender from sending a correct formated message. It automatically adds spaces between each sentences: hi.bro. -> hi. bro. Also, if the message is not ended with a correct punctuation, it automatically adds: hi.bro -> hi. bro.
+## Private Messanger
+The private messanger allows you to chat with a specific player privately without other players knowing.
+### Replier
+The replier will records actions between two players who are chatting under private messanger. You can do /reply <message> to reply to the player who has privately messaged you, or who you have privatly message to.
