@@ -18,6 +18,12 @@ public class Commander implements CommandExecutor {
 	public static String addshortenmessagemessage;
 	public static List<Player> msgsender = new ArrayList<Player>();
 	public static List<Player> msgreceiver = new ArrayList<Player>();
+	public static List<Player> setjoinmessage = new ArrayList<Player>();
+	public static List<Player> setmotd = new ArrayList<Player>();
+	public static List<Player> setquitmessage = new ArrayList<Player>();
+	public static List<String> joinmessages = new ArrayList<String>();
+	public static List<String> quitmessages = new ArrayList<String>();
+	public static List<String> motd = new ArrayList<String>();
 	public Commander(Main main) {
 		this.plugin = main;
 	}
@@ -102,6 +108,10 @@ public class Commander implements CommandExecutor {
 						Main.sendMessage(ChatColor.RED + "Key is registered!", prefix, player);
 						return true;
 					}
+					if (setjoinmessage.contains(player) || setquitmessage.contains(player) || setmotd.contains(player)) {
+						Main.sendMessage(ChatColor.RED + "You are configuring another option in configuration file! Terminate the process or save it and re-issue the command.", prefix, player);
+						return true;
+					}
 					addshortenmessagelist.add(player);
 					Main.sendMessage(ChatColor.YELLOW + "Please enter the message that will replace the key.", prefix, player);
 					addshortenmessagekey = args[2];
@@ -136,6 +146,124 @@ public class Commander implements CommandExecutor {
 					plugin.saveConfig();
 					plugin.reloadConfig();
 					Main.sendMessage(ChatColor.GREEN + "You have successfully removed a shorten message!", prefix, player);
+					return true;
+				}
+				return true;
+			}
+			if (args[0].equalsIgnoreCase("loghandler")) {
+				if (args.length == 1) {
+					Main.sendMessage(ChatColor.RED + "Please specify a function!", prefix, player);
+					return true;
+				}
+				if (args[1].equalsIgnoreCase("joinmessage")) {
+					if (args.length == 2 || args[2].equalsIgnoreCase("view")) {
+						if (!(player.hasPermission("chatassets.loghandler.joinmessage.view"))) {
+							Main.sendMessage(nopermerror, prefix, player);
+							return true;
+						}
+						Main.sendMessage(ChatColor.GREEN + "Current player join broadcast message:", prefix, player);
+						List<String> joinmessage = plugin.getConfig().getStringList("loghandler.join-message");
+						for (String x : joinmessage) {
+							Main.sendMessage(Main.colorcode(x), prefix, player);
+						}
+						return true;
+					}
+					if (args[2].equalsIgnoreCase("set")) {
+						if (!(player.hasPermission("chatassets.loghandler.joinmessage,set"))) {
+							Main.sendMessage(nopermerror, prefix, player);
+							return true;
+						}
+						if (setquitmessage.contains(player) || setmotd.contains(player) || addshortenmessagelist.contains(player)) {
+							Main.sendMessage(ChatColor.RED + "You are configuring another option in configuration file! Terminate the process or save it and re-issue the command.", prefix, player);
+							return true;
+						}
+						Main.sendMessage(ChatColor.YELLOW + "Each line you typed will be saved in the list of player join message until you issue /chatassets loghandler done", prefix, player);
+						setjoinmessage.add(player);
+						return true;
+					}
+					return true;
+				}
+				if (args[1].equalsIgnoreCase("quitmessage")) {
+					if (args.length == 2 || args[2].equalsIgnoreCase("view")) {
+						if (!(player.hasPermission("chatassets.loghandler.quitmessage.view"))) {
+							Main.sendMessage(nopermerror, prefix, player);
+							return true;
+						}
+						Main.sendMessage(ChatColor.GREEN + "Current player quit broadcast message:", prefix, player);
+						List<String> quitmessage = plugin.getConfig().getStringList("loghandler.quit-message");
+						for (String x : quitmessage) {
+							Main.sendMessage(Main.colorcode(x), prefix, player);
+						}
+						return true;
+					}
+					if (args[2].equalsIgnoreCase("set")) {
+						if (!(player.hasPermission("chatassets.loghandler.quitmessage.set"))) {
+							Main.sendMessage(nopermerror, prefix, player);
+							return true;
+						}
+						if (setjoinmessage.contains(player) || setmotd.contains(player) || addshortenmessagelist.contains(player)) {
+							Main.sendMessage(ChatColor.RED + "You are configuring another option in configuration file! Terminate the process or save it and re-issue the command.", prefix, player);
+							return true;
+						}
+						Main.sendMessage(ChatColor.YELLOW + "Each line you typed will be saved in the list of player quit message until you issue /chatassets loghandler done", prefix, player);
+						setquitmessage.add(player);
+						return true;
+					}
+					return true;
+				}
+				if (args[1].equalsIgnoreCase("motd")) {
+					if (args.length == 2 || args[2].equalsIgnoreCase("view")) {
+						if (!(player.hasPermission("chatassets.loghandler.motd.view"))) {
+							Main.sendMessage(nopermerror, prefix, player);
+							return true;
+						}
+						Main.sendMessage(ChatColor.GREEN + "Current motd:", prefix, player);
+						List<String> motd = plugin.getConfig().getStringList("loghandler.motd");
+						for (String x : motd) {
+							Main.sendMessage(Main.colorcode(x), prefix, player);
+						}
+						return true;
+					}
+					if (args[2].equalsIgnoreCase("set")) {
+						if (!(player.hasPermission("chatassets.loghandler.motd.set"))) {
+							Main.sendMessage(nopermerror, prefix, player);
+						}
+						if (setquitmessage.contains(player) || setjoinmessage.contains(player) || addshortenmessagelist.contains(player)) {
+							Main.sendMessage(ChatColor.RED + "You are configuring another option in configuration file! Terminate the process or save it and re-issue the command.", prefix, player);
+							return true;
+						}
+						Main.sendMessage(ChatColor.YELLOW + "Each line you typed will be saved in the list of player join message until you issue /chatassets loghandler done", prefix, player);
+						setmotd.add(player);
+						return true;
+					}
+					return true;
+				}
+				if (args[1].equalsIgnoreCase("done")) {
+					if (setjoinmessage.contains(player)) {
+						setjoinmessage.remove(player);
+						plugin.getConfig().set("loghandler.join-message", joinmessages);
+						plugin.saveConfig();
+						plugin.reloadConfig();
+						Main.sendMessage(ChatColor.GREEN + "New player join message is set!", prefix, player);
+						return true;
+					}
+					if (setquitmessage.contains(player)) {
+						setquitmessage.remove(player);
+						plugin.getConfig().set("loghandler.quit-message", quitmessages);
+						plugin.saveConfig();
+						plugin.reloadConfig();
+						Main.sendMessage(ChatColor.GREEN + "New player quit message is set!", prefix, player);
+						return true;
+					}
+					if (setmotd.contains(player)) {
+						setmotd.remove(player);
+						plugin.getConfig().set("loghandler.motd", motd);
+						plugin.saveConfig();
+						plugin.reloadConfig();
+						Main.sendMessage(ChatColor.GREEN + "New motd is set!", prefix, player);
+						return true;
+					}
+					Main.sendMessage(ChatColor.RED + "You are not configuring an option in configuration file!", prefix, player);
 					return true;
 				}
 				return true;

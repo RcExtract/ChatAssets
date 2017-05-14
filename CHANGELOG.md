@@ -72,3 +72,14 @@ Added customization for message when a player joins or leaves the server, and mo
     - Join Message
 	- Quit Message
 	- Motd
+## Update 1.1.1
+- Changed JoinHandler.java
+- Changed QuitHandler.java
+- Changed Commander.java
+  - Added the ability to configure
+    - Player join broadcast message
+	- Player quit broadcast message
+	- motd sent on join
+  - Fixed several bugs and compabilities between each functions.
+- Added LogHandlerExtend.java
+  - Handles part of the loghandler configurations.

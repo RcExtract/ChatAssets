@@ -32,9 +32,9 @@ permissions:
             chatassets.basic.automodify.bypass: true
             chatassets.msg: true
             chatassets.msg.reply: true
-            chatassets.loghandler.joinmessage: true
-            chatassets.loghandler.motd: true
-            chatassets.loghandler.quitmessage: true
+            chatassets.loghandler.joinmessage.receive: true
+            chatassets.loghandler.motd.receive: true
+            chatassets.loghandler.quitmessage.receive: true
     chatassets.main:
         default: true
     chatassets.help:
@@ -63,9 +63,21 @@ permissions:
         default: true
     chatassets.msg.reply:
         default: true
-    chatassets.loghandler.joinmessage:
+    chatassets.loghandler.joinmessage.receive:
         default: true
-    chatassets.loghandler.motd:
+    chatassets.loghandler.motd.receive:
         default: true
-    chatassets.loghandler.quitmessage:
+    chatassets.loghandler.quitmessage.receive:
         default: true
+    chatassets.loghandler.joinmessage.view:
+        default: true
+    chatassets.loghandler.motd.view:
+        default: true
+    chatassets.loghandler.quitmessage.view:
+        default: true
+    chatassets.loghandler.joinmessage.set:
+        default: op
+    chatassets.loghandler.motd.set:
+        default: op
+    chatassets.loghandler.quitmessage.set:
+        default: op

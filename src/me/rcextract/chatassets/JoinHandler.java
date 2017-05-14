@@ -33,7 +33,7 @@ public class JoinHandler implements Listener {
 		}
 		event.setJoinMessage(null);
 		for (String x : joinmessage) {
-			Bukkit.broadcast(Main.colorcode(x), "chatassets.loghandler.joinmessage");
+			Bukkit.broadcast(Main.colorcode(x), "chatassets.loghandler.joinmessage.receive");
 		}
 		String z;
 		int index2 = 0;
@@ -45,7 +45,7 @@ public class JoinHandler implements Listener {
 			motd.set(index2, z);
 			x = z;
 		}
-		if (!player.hasPermission("chatassets.loghandler.motd")) {
+		if (!player.hasPermission("chatassets.loghandler.motd.receive")) {
 			
 		} else {
 			for (String x : motd) {

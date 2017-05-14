@@ -44,7 +44,7 @@ public class QuitHandler implements Listener {
 		}
 		event.setQuitMessage(null);
 		for (String x : leavemessage) {
-			Bukkit.broadcast(Main.colorcode(x), "chatassets.loghandler.quitmessage");
+			Bukkit.broadcast(Main.colorcode(x), "chatassets.loghandler.quitmessage.receive");
 		}
 	}
 }

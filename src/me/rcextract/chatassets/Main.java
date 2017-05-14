@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
 		this.registerEvents(new MessageShortener(this));
 		this.registerEvents(new QuitHandler(this));
 		this.registerEvents(new JoinHandler(this));
+		this.registerEvents(new LogHandlerExtend(this));
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 	}
