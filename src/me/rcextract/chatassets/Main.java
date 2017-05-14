@@ -28,6 +28,7 @@ public class Main extends JavaPlugin {
 		//Cooldowner not registered
 		this.registerEvents(new MessageShortener(this));
 		this.registerEvents(new QuitHandler(this));
+		this.registerEvents(new JoinHandler(this));
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 	}

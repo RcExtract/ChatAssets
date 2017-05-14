@@ -55,3 +55,20 @@ Added a lot of things, especially chat auto modifier, msg and reply.
 - Added QuitHandler.java
   - Handles part of the reply command.
 - Changed config.yml
+## Update 1.1.0
+Added customization for message when a player joins or leaves the server, and motd.
+- Changed QuitHandler.java
+  - Added customization for message when a player leaves the server.
+- Added JoinHandler.java
+  - Added customization for message when a player joins the server, and motd.
+- Added PlaceHolders
+  - <playername>: Player real name
+  - <displayname>: Displayed player name
+  - <onlineplayercount>: Total online players count
+  - These placeholders can only be used in this plugin.
+  - This plugin will support PlaceHolderAPI, which means it is not supported currently.
+- Changed config.yml
+  - Added options
+    - Join Message
+	- Quit Message
+	- Motd

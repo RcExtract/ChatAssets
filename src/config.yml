@@ -21,3 +21,10 @@ message-shortener:
         '1':
             key: "shortkey"
             message: "longmessage"
+loghandler:
+    join-message:
+    - "<playername> joined the game"
+    quit-message:
+    - "<playername> left the game"
+    motd:
+    - "This is a test motd!"
