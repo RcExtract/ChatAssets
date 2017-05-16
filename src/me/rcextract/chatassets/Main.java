@@ -1,23 +1,30 @@
 package me.rcextract.chatassets;
 
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
-
 public class Main extends JavaPlugin {
-	
-	public static Boolean sendmessageonactionbar;
+	public static boolean sendmessageonactionbar;
+
+	public static void sendMessage(String message, String prefix, Player player) {
+		if (sendmessageonactionbar)
+			ActionBarAPI.sendActionBar(player, message);
+		else
+			player.sendMessage(prefix + message);
+	}
+
+	public static String colorcode(String string) {
+		return ChatColor.translateAlternateColorCodes('&', string);
+	}
+
 	@Override
 	public void onEnable() {
-		if (!(Bukkit.getPluginManager().isPluginEnabled("ActionBarAPI"))) {
-			sendmessageonactionbar = false;
-		} else {
-			sendmessageonactionbar = getConfig().getBoolean("send-message-on-action-bar");
-		}
+		sendmessageonactionbar = Bukkit.getPluginManager().isPluginEnabled("ActionBarAPI") && getConfig().getBoolean("send-message-on-action-bar");
+
 		Commander commander = new Commander(this);
 		getCommand("chatassets").setExecutor(commander);
 		getCommand("reply").setExecutor(commander);
@@ -33,21 +40,12 @@ public class Main extends JavaPlugin {
 		getConfig().options().copyDefaults(true);
 		saveConfig();
 	}
+
 	@Override
 	public void onDisable() {
 		saveConfig();
 	}
-	public static void sendMessage(String message, String prefix, Player player) {
-		if (sendmessageonactionbar == false || sendmessageonactionbar == null) {
-			player.sendMessage(prefix + message);
-		} else {
-			ActionBarAPI.sendActionBar(player, message);
-		}
-	}
-	public static String colorcode(String string) {
-		String returnstring = ChatColor.translateAlternateColorCodes('&', string);
-		return returnstring;
-	}
+
 	public void registerEvents(Listener listener) {
 		Bukkit.getPluginManager().registerEvents(listener, this);
 	}
