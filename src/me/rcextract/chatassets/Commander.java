@@ -1,8 +1,5 @@
 package me.rcextract.chatassets;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -10,26 +7,25 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Commander implements CommandExecutor {
 
-	private Main plugin;
 	public static List<Player> addshortenmessagelist = new ArrayList<Player>();
-	public static String addshortenmessagekey;
-	public static String addshortenmessagemessage;
-	public static List<Player> msgsender = new ArrayList<Player>();
-	public static List<Player> msgreceiver = new ArrayList<Player>();
-	public static List<Player> setjoinmessage = new ArrayList<Player>();
-	public static List<Player> setmotd = new ArrayList<Player>();
-	public static List<Player> setquitmessage = new ArrayList<Player>();
-	public static List<String> joinmessages = new ArrayList<String>();
-	public static List<String> quitmessages = new ArrayList<String>();
-	public static List<String> motd = new ArrayList<String>();
+	public static String addshortenmessagekey, addshortenmessagemessage;
+	public static List<Player> msgsender = new ArrayList<Player>(), msgreceiver = new ArrayList<Player>(), setjoinmessage = new ArrayList<Player>(), setmotd = new ArrayList<Player>(), setquitmessage = new ArrayList<Player>();
+	public static List<String> joinmessages = new ArrayList<String>(), quitmessages = new ArrayList<String>(), motd = new ArrayList<String>();
+	private Main plugin;
+
 	public Commander(Main main) {
 		this.plugin = main;
 	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String prefix = plugin.getConfig().getString("prefix");
+
 		if (cmd.getName().equalsIgnoreCase("chatassets")) {
 			String nopermerror = ChatColor.RED + "You do not have sufficient permission to perform this command!";
 			String toomanyargserror = ChatColor.RED + "Too many arguments! " + ChatColor.YELLOW + "Do /help for help.";
@@ -61,9 +57,9 @@ public class Commander implements CommandExecutor {
 					Main.sendMessage(nopermerror, prefix, player);
 					return true;
 				}
-					plugin.reloadConfig();
-					Main.sendMessage(ChatColor.GREEN + "Configuration file is reloaded successfully!", prefix, player);
-					return true;
+				plugin.reloadConfig();
+				Main.sendMessage(ChatColor.GREEN + "Configuration file is reloaded successfully!", prefix, player);
+				return true;
 			}
 			if (args[0].equalsIgnoreCase("messageshortener")) {
 				List<String> replacestring = new ArrayList<String>();
@@ -341,6 +337,7 @@ public class Commander implements CommandExecutor {
 		}
 		return false;
 	}
+
 	public String chatautomodifier(String message, Player player) {
 		List<String> sentences = new ArrayList<String>();
 		int index = 0;
@@ -352,7 +349,7 @@ public class Commander implements CommandExecutor {
 				if (!(x.startsWith(" "))) {
 					index = sentences.indexOf(x);
 					if (index == 0) {
-						
+
 					} else {
 						String y = " " + x;
 						sentences.set(index, y);
@@ -364,7 +361,7 @@ public class Commander implements CommandExecutor {
 			if (!(finalmessage.endsWith(".")) && !(finalmessage.endsWith("?")) && !(finalmessage.endsWith("!"))) {
 				finalmessage = finalmessage + ".";
 			} else {
-				
+
 			}
 			return finalmessage;
 		} else {

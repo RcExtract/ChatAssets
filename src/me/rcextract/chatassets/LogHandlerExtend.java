@@ -10,14 +10,16 @@ import org.bukkit.plugin.Plugin;
 public class LogHandlerExtend implements Listener {
 
 	private Plugin plugin;
+
 	public LogHandlerExtend(Main main) {
 		this.plugin = main;
 	}
+
 	@EventHandler
 	public void onSetLine(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
-		String prefix = plugin.getConfig().getString("prefix");
-		String line = event.getMessage();
+		String prefix = plugin.getConfig().getString("prefix"), line = event.getMessage();
+
 		if (Commander.setjoinmessage.contains(player)) {
 			event.setCancelled(true);
 			Commander.joinmessages.add(line);
@@ -30,8 +32,6 @@ public class LogHandlerExtend implements Listener {
 			event.setCancelled(true);
 			Commander.motd.add(line);
 			Main.sendMessage(line + ChatColor.GREEN + " has been added. " + ChatColor.YELLOW + "To stop adding lines to motd on join, issue /chatassets loghandler done", prefix, player);
-		} else {
-			
 		}
 	}
 }
