@@ -83,3 +83,20 @@ Added customization for message when a player joins or leaves the server, and mo
   - Fixed several bugs and compabilities between each functions.
 - Added LogHandlerExtend.java
   - Handles part of the loghandler configurations.
+## Update 2.0
+- Recoded the entire plugin
+- Internal API
+- Fixed several bugs and compabilities between each functions.
+- Changed config.yml
+  - Changed options
+    - join-message -> join-messages
+    - quit-message -> quit-messages
+  - Removed options
+    - total-messages
+      - Total messages will be counted inside the plugin
+- Updated MessageShortener.java
+  - You should now type "@<player_name> <message>" to send a message privately
+## Update 2.0.1
+- Fixed several bugs and compabilities between each functions.
+- Changed config.yml
+  - You can now toggle the player join, leave, and motd messages modifications
