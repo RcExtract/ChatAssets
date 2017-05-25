@@ -42,6 +42,7 @@ public class Commander implements CommandExecutor {
 				player.sendMessage("/chatassets ac");
 				player.sendMessage("/chatassets ms");
 				player.sendMessage("/chatassets acs");
+				player.sendMessage("/chatassets lh");
 				player.sendMessage("/chatassets help");
 				player.sendMessage("/chatassets reload");
 				return true;
@@ -55,7 +56,7 @@ public class Commander implements CommandExecutor {
 				Main.sendMessage(ChatColor.GREEN + "The configuration file has been successfully reloaded.", player);
 				return true;
 			}
-			if (args[0].equalsIgnoreCase("messageshortener") || args[0].equalsIgnoreCase("anticurse") || args[0].equalsIgnoreCase("anticasespam")) {
+			if (args[0].equalsIgnoreCase("messageshortener") || args[0].equalsIgnoreCase("anticurse") || args[0].equalsIgnoreCase("anticasespam") || args[0].equalsIgnoreCase("loghandler")) {
 				player.sendMessage(ChatColor.YELLOW + "This command is deprecated and warning will be removed soon. Please execute " + ChatColor.GRAY + ChatColor.ITALIC + "/chatassets help " + ChatColor.RESET + ChatColor.YELLOW + "for further information.");
 				return true;
 			}
@@ -110,6 +111,11 @@ public class Commander implements CommandExecutor {
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("ac")) {
+				if (args.length == 1) {
+					Main.sendMessage(ChatColor.RED + "Command does not exist!", player);
+					player.performCommand("chatassets help");
+					return true;
+				}
 				List<String> badwords = AntiCurse.getBadWords();
 				if (args[1].equalsIgnoreCase("badwords")) {
 					int pages = 0;
@@ -240,6 +246,11 @@ public class Commander implements CommandExecutor {
 				return true;
 			}
 			if (args[0].equalsIgnoreCase("lh")) {
+				if (args.length == 1) {
+					Main.sendMessage(ChatColor.RED + "Command does not exist!", player);
+					player.performCommand("chatassets help");
+					return true;
+				}
 				if (args[1].equalsIgnoreCase("joinmessage")) {
 					if (args.length == 2 || args[2].equalsIgnoreCase("view")) {
 						player.sendMessage(ChatColor.YELLOW + "Join Message:");
@@ -295,6 +306,8 @@ public class Commander implements CommandExecutor {
 					}
 					return true;
 				}
+				Main.sendMessage(ChatColor.RED + "Command does not exist!", player);
+				player.performCommand("chatassets help");
 				return true;
 			}
 			return true;

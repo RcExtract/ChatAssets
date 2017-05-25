@@ -19,13 +19,19 @@ public class LogHandler implements Listener {
 	private static List<String> joinmessage;
 	private static List<String> quitmessage;
 	private static List<String> motd;
+	private static boolean enableJoinMessage;
+	private static boolean enableQuitMessage;
+	private static boolean enableMotd;
 	
 	//Constructor
 	public LogHandler(Main main) {
 		LogHandler.plugin = main;
-		joinmessage = plugin.getConfig().getStringList("loghandler.join-messages");
-		quitmessage = plugin.getConfig().getStringList("loghandler.quit-messages");
-		motd = plugin.getConfig().getStringList("loghandler.motd");
+		joinmessage = plugin.getConfig().getStringList("loghandler.join-messages.message");
+		quitmessage = plugin.getConfig().getStringList("loghandler.quit-messages.message");
+		motd = plugin.getConfig().getStringList("loghandler.motd.message");
+		enableJoinMessage = plugin.getConfig().getBoolean("loghandler.join-messages.enable");
+		enableQuitMessage = plugin.getConfig().getBoolean("loghandler.quit-messages.enable");
+		enableMotd = plugin.getConfig().getBoolean("loghandler.motd.enable");
 	}
 	
 	public static void PlaceHolderSetup(Player player) {
@@ -52,7 +58,7 @@ public class LogHandler implements Listener {
 	}
 	
 	public static void setJoinMessages(List<String> joinmessage, boolean reload) {
-		plugin.getConfig().set("loghandler.join-messages", joinmessage);
+		plugin.getConfig().set("loghandler.join-messages.message", joinmessage);
 		if (reload) {
 			plugin.saveConfig();
 			plugin.reloadConfig();
@@ -64,7 +70,7 @@ public class LogHandler implements Listener {
 	}
 	
 	public static void setQuitMessages(List<String> quitmessage, boolean reload) {
-		plugin.getConfig().set("loghandler.quit-messages", quitmessage);
+		plugin.getConfig().set("loghandler.quit-messages.message", quitmessage);
 		if (reload) {
 			plugin.saveConfig();
 			plugin.reloadConfig();
@@ -76,7 +82,7 @@ public class LogHandler implements Listener {
 	}
 	
 	public static void setMotd(List<String> motd, boolean reload) {
-		plugin.getConfig().set("loghandler.motd", motd);
+		plugin.getConfig().set("loghandler.motd.message", motd);
 		if (reload) {
 			plugin.saveConfig();
 			plugin.reloadConfig();
@@ -131,8 +137,10 @@ public class LogHandler implements Listener {
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		PlaceHolderSetup(player);
-		broadcastJoinMessage("chatassets.loghandler.joinmessage.receive", event);
-		if (player.hasPermission("chatassets.loghandler.motd.receive")) {
+		if (enableJoinMessage) {
+			broadcastJoinMessage("chatassets.loghandler.joinmessage.receive", event);
+		}
+		if (player.hasPermission("chatassets.loghandler.motd.receive") && enableMotd) {
 			sendMotd(player);
 		}
 	}
@@ -140,7 +148,9 @@ public class LogHandler implements Listener {
 	public void onQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		PlaceHolderSetup(player);
-		broadcastQuitMessage("chatassets.loghandler.quitmessage.receive", event);
+		if (enableQuitMessage) {
+			broadcastQuitMessage("chatassets.loghandler.quitmessage.receive", event);
+		}
 		int index = 0;
 		if (Commander.msgsender.contains(player)) {
 			index = Commander.msgsender.indexOf(player);

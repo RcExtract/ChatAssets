@@ -9,17 +9,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.plugin.Plugin;
 
 public class PrivateMessenger implements Listener {
 
+	private Plugin plugin;
 	public PrivateMessenger(Main main) {
-
+		plugin = main;
 	}
 	@EventHandler
 	public void onPrivateTag(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
+		boolean enablation = plugin.getConfig().getBoolean("enable.private-messenger");
 		String message = event.getMessage();
-		if (!(Main.chatHoldOn(player, "")) && message.startsWith("@")) {
+		if (!(Main.chatHoldOn(player, "")) && enablation && message.startsWith("@")) {
 			event.setCancelled(true);
 			if (!(player.hasPermission("chatassets.msg"))) {
 				Main.sendMessage(Main.noPermError("chat privately!"), player);

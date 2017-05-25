@@ -3,8 +3,10 @@ send-message-on-action-bar: true
 enable:
     anticurse: true
     anticasespam: true
-    cooldowner: true
     chatautomodifier: true
+    cooldowner: false
+    loghandler: true
+    private-messenger: true
 anticurse:
     cancel-cursed-message: false
     replaced-char: "*"
@@ -22,8 +24,14 @@ message-shortener:
             message: "longmessage"
 loghandler:
     join-messages:
-    - "<playername> joined the game"
+        enable: true
+        message:
+        - "<playername> joined the game"
     quit-messages:
-    - "<playername> left the game"
+        enable: true
+        message:
+        - "<playername> left the game"
     motd:
-    - "This is a test motd!"
+        enable: true
+        message:
+        - "This is a test motd!"
