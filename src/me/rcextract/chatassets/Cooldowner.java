@@ -23,7 +23,7 @@ public class Cooldowner implements Listener {
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
 		long timecount = 20 * plugin.getConfig().getInt("cooldowner.secs-before-next-message");
-		String prefix = plugin.getConfig().getString("prefix"), cooldownerror = ChatColor.YELLOW + "You need to wait for " + Long.toString(timecount / 20) + " seconds between sending two messages.";
+		String cooldownerror = ChatColor.YELLOW + "You need to wait for " + Long.toString(timecount / 20) + " seconds between sending two messages.";
 		boolean enablation = plugin.getConfig().getBoolean("enable.cooldowner");
 		List<Player> cooldownplayer = new ArrayList<Player>();
 
@@ -31,7 +31,7 @@ public class Cooldowner implements Listener {
 			if (cooldownplayer.contains(player)) {
 				if (!(player.hasPermission("chatassets.cooldowner.bypass"))) {
 					event.setCancelled(true);
-					Main.sendMessage(cooldownerror, prefix, player);
+					Main.sendMessage(cooldownerror, player);
 				} else {
 					cooldownplayer.remove(player);
 				}

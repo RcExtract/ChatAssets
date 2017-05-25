@@ -4,6 +4,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="C:/Users/Owner/Downloads/spigot-1.11.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Bernard/Downloads/ActionBarAPI-1.5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bernard/Downloads/TitleAPI-1.7.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -7,7 +7,7 @@ enable:
     chatautomodifier: true
 anticurse:
     cancel-cursed-message: false
-    replaced-string: "*"
+    replaced-char: "*"
     badwords:
     - badword
 anticasespam:
@@ -16,15 +16,14 @@ anticasespam:
 cooldowner:
     secs-before-next-message: 5
 message-shortener:
-    totalmessages: 1
     messages:
         '1':
             key: "shortkey"
             message: "longmessage"
 loghandler:
-    join-message:
+    join-messages:
     - "<playername> joined the game"
-    quit-message:
+    quit-messages:
     - "<playername> left the game"
     motd:
     - "This is a test motd!"
