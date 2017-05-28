@@ -113,3 +113,6 @@ Added customization for message when a player joins or leaves the server, and mo
   - Added options
     - version
       - Used to check updates for message-shortener.uml **Do not change it**. It will not be considered as a shorten message.
+## Update 2.1.1
+- Added comments to config.yml and message-shortener.yml
+- Improved configuration system
