@@ -1,5 +1,5 @@
 name: ChatAssets
-version: 0.2
+version: 2.1.1
 description: This plugin collects several mainly used chat related features.
 author: GitHub/RcExtract
 main: me.rcextract.chatassets.Main
