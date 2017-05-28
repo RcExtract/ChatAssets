@@ -1,75 +1,92 @@
 package me.rcextract.chatassets;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageShortener implements Listener {
 
-	private Plugin plugin;
+	//ConfigManager Instance
+	private static FileConfiguration config;
 
+	//Constructor
 	public MessageShortener(Main main) {
-		this.plugin = main;
+		MessageShortener.config = ConfigManager.getMsConfig();
 	}
 
+	public static List<String> getKeys() {
+		List<String> keys = new ArrayList<String>();
+		for (String x : config.getKeys(false)) {
+			keys.add(x);
+		}
+		keys.remove("version");
+		return keys;
+	}
+	
+	public static String getMessage(String key) {
+		String message = config.getString(key);
+		return message;
+	}
+	
+	public static void setMessage(String key, String message, boolean save) {
+		config.set(key, message);
+		if (save) {
+			ConfigManager.saveMsConfig();
+		}
+	}
+	
+	public static void unRegister(String key, boolean reload) {
+		config.set(key, null);
+		if (reload) {
+			ConfigManager.saveMsConfig();
+		}
+	}
+	
+	public static String replaceKey(String message) {
+		int index = 0;
+		List<String> messagewords = new ArrayList<String>();
+		List<String> replacestrings = getKeys();
+		String replacemessage;
+		for (String x : message.split(" ")) {
+			messagewords.add(x);
+		}
+		for (String x : messagewords) {
+			for (String y : replacestrings) {
+				if (x.contains(y)) {
+					replacemessage = getMessage(y);
+					index = messagewords.indexOf(x);
+					messagewords.set(index, x.replaceAll(y, replacemessage));
+					x = x.replaceAll(y, replacemessage);
+				}
+			}
+		}
+		String output = String.join(" ", messagewords);
+		return output;
+	}
+	//Main
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
-		String message = event.getMessage(), prefix = plugin.getConfig().getString("prefix");
-		int totalmessages = plugin.getConfig().getInt("message-shortener.totalmessages");
-
-		if (Commander.addshortenmessagelist.contains(player)) {
-			event.setCancelled(true);
-			Commander.addshortenmessagemessage = message;
-			String addmessage = message, addkey = Commander.addshortenmessagekey;
-			Commander.addshortenmessagelist.remove(player);
-			plugin.getConfig().set("message-shortener.messages." + Integer.toString(totalmessages + 1) + ".key", addkey);
-			plugin.getConfig().set("message-shortener.messages." + Integer.toString(totalmessages + 1) + ".message", addmessage);
-			plugin.getConfig().set("message-shortener.totalmessages", totalmessages + 1);
-			;
-			plugin.saveConfig();
-			plugin.reloadConfig();
-			Main.sendMessage(ChatColor.GREEN + "You have successfully added a new shorten message!", prefix, player);
-			Main.sendMessage("Key: " + Main.colorcode(addkey), prefix, player);
-			Main.sendMessage("Message: " + Main.colorcode(addmessage), prefix, player);
-		} else {
-			int index = 0;
-			String replacedstring = new String(), nopermerror = ChatColor.RED + "You do not have sufficient permission to use this message shortener key!", finalmessage;
-			List<String> messagewords = new ArrayList<String>(), replacestring = new ArrayList<String>();
-
-			for (String x : message.split(" "))
-				messagewords.add(x);
-
-			for (int i = 1; i <= totalmessages; i++) {
-				String x = plugin.getConfig().getString("message-shortener.messages." + i + ".key");
-				replacestring.add(x);
-			}
-
-			for (String x : messagewords) {
-				for (String y : replacestring) {
-					if (x.contains(y)) {
-						if (!(player.hasPermission("chatassets.messageshortener.use"))) {
-							event.setCancelled(true);
-							Main.sendMessage(nopermerror, prefix, player);
-						} else {
-							for (int i = 1; i <= totalmessages; i++)
-								if (y.equals(plugin.getConfig().getString("message-shortener.messages." + Integer.toString(i) + ".key")))
-									replacedstring = plugin.getConfig().getString("message-shortener.messages." + Integer.toString(i) + ".message");
-
-							index = messagewords.indexOf(x);
-							messagewords.set(index, x.replaceAll(y, replacedstring));
-							x = messagewords.get(index);
-							finalmessage = String.join(" ", messagewords);
-							event.setMessage(Main.colorcode(finalmessage));
-							Main.sendMessage(ChatColor.YELLOW + "Your key has been successfully replaced with the corrosponding string.", prefix, player);
-						}
-					}
+		String message = event.getMessage();
+		if (!(Main.chatHoldOn(player, "addshortenmessagelist"))) {
+			if (Commander.addshortenmessagelist.contains(player)) {
+				event.setCancelled(true);
+				Commander.addshortenmessagemessage = message;
+				String addmessage = message, addkey = Commander.addshortenmessagekey;
+				Commander.addshortenmessagelist.remove(player);
+				setMessage(addkey, addmessage, true);
+				Main.sendMessage(ChatColor.GREEN + "You have successfully added a new shorten message!", player);
+				player.sendMessage("Key: " + Main.colorcode(addkey));
+				player.sendMessage("Message: " + Main.colorcode(addmessage));
+			} else {
+				if (player.hasPermission("chatassets.messageshortener.use")) {
+					event.setMessage(Main.colorcode(replaceKey(message)));
 				}
 			}
 		}

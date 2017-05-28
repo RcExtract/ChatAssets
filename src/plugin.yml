@@ -8,12 +8,6 @@ commands:
     chatassets:
         usage: /<command>
         description: Main command of ChatAssets.
-    msg:
-        usage: /<command>
-        description: Message a player privately.
-    reply:
-        usage: /<command>
-        description: Reply to a player.
 permissions:
     chatassets.*:
         default: false
@@ -27,7 +21,6 @@ permissions:
             chatassets.messageshortener.add: true
             chatassets.messageshortener.remove: true
             chatassets.messageshortener.use: true
-            chatassets.antiadvertising.bypass: true
             chatassets.basic.chat: true
             chatassets.basic.automodify.bypass: true
             chatassets.msg: true
@@ -35,6 +28,12 @@ permissions:
             chatassets.loghandler.joinmessage.receive: true
             chatassets.loghandler.motd.receive: true
             chatassets.loghandler.quitmessage.receive: true
+            chatassets.loghandler.joinmessage.set: true
+            chatassets.loghandler.motd.set: true
+            chatassets.loghandler.quitmessage.set: true
+            chatassets.anticasespam.modify: true
+            chatassets.anticurse.add: true
+            chatassets.anticurse.clear: true
     chatassets.main:
         default: true
     chatassets.help:
@@ -53,8 +52,6 @@ permissions:
         default: op
     chatassets.messageshortener.use:
         default: true
-    chatassets.antiadvertising.bypass:
-        default: false
     chatassets.basic.chat:
         default: true
     chatassets.basic.automodify.bypass:
@@ -69,15 +66,15 @@ permissions:
         default: true
     chatassets.loghandler.quitmessage.receive:
         default: true
-    chatassets.loghandler.joinmessage.view:
-        default: true
-    chatassets.loghandler.motd.view:
-        default: true
-    chatassets.loghandler.quitmessage.view:
-        default: true
     chatassets.loghandler.joinmessage.set:
         default: op
     chatassets.loghandler.motd.set:
         default: op
     chatassets.loghandler.quitmessage.set:
+        default: op
+    chatassets.anticasespam.modify:
+        default: op
+    chatassets.anticurse.add:
+        default: op
+    chatassets.anticurse.clear:
         default: op

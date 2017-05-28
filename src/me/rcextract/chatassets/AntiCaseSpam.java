@@ -1,46 +1,74 @@
 package me.rcextract.chatassets;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.plugin.Plugin;
 
 public class AntiCaseSpam implements Listener {
 
-	private Plugin plugin;
+	//Plugin Instance
+	private static FileConfiguration config;
+	private static int maxUpperCases;
+	private static boolean autolowercase;
 
+	//Constructor
 	public AntiCaseSpam(Main main) {
-		this.plugin = main;
+		AntiCaseSpam.config = ConfigManager.getConfig();
+		maxUpperCases = config.getInt("anticasespam.max-upper-cases");
+		autolowercase = config.getBoolean("anticasespam.all-char-to-lower-case-if-over-max");
 	}
 
+	
+	public static int getMaxUpperCases() {
+		return maxUpperCases;
+	}
+	
+	public static void setMaxUpperCases(int maxUpperCases, boolean reload) {
+		config.set("anticasespam.max-upper-cases", maxUpperCases);
+		if (reload) {
+			ConfigManager.saveConfig();
+			ConfigManager.reloadConfig();
+		}
+	}
+	
+	public static int getUpperCases(String message) {
+		int uppercase = 0;
+		for (char x : message.toCharArray()) {
+			if (Character.isUpperCase(x)) {
+				uppercase++;
+			}
+		}
+		return uppercase;
+	}
+	
+	public static boolean getAutoLowerCaseStatus() {
+		return autolowercase;
+	}
+	
+	public static void setAutoLowerCaseStatus(boolean status, boolean reload) {
+		config.set("anticasespam.all-char-to-lower-case-if-over-max", status);
+		if (reload) {
+			ConfigManager.saveConfig();
+			ConfigManager.reloadConfig();
+		}
+	}
+	
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
-		String prefix = plugin.getConfig().getString("prefix");
-
-		if (!Commander.addshortenmessagelist.contains(player)) {
-			String nopermerror = ChatColor.RED + "You do not have sufficient permission to perform this action!", message = event.getMessage();
-			int maxuppercase = plugin.getConfig().getInt("anticasespam.max-upper-cases"), uppers = 0;
-			boolean enablation = plugin.getConfig().getBoolean("enable.anticasespam"), autotolowercase = plugin.getConfig().getBoolean("anticasespam.all-char-to-lower-case-if-over-max");
-
-			if (enablation) {
-				String messageinternal = message.substring(0, 1).toUpperCase() + message.substring(1);
-				if (maxuppercase > 0) {
-					for (char ok : messageinternal.toCharArray())
-						if (Character.isUpperCase(ok))
-							uppers++;
-
-					if (uppers > maxuppercase && !player.hasPermission("chatassets.anticasespam.bypass")) {
-						if (!autotolowercase) {
-							event.setCancelled(true);
-							Main.sendMessage(nopermerror, prefix, player);
-						} else {
-							event.setMessage(Main.colorcode(message.toLowerCase()));
-							Main.sendMessage(ChatColor.YELLOW + "Your message has been lower cased because the amount of upper cases is over the maximum amount.", prefix, player);
-						}
-					}
+		boolean enablation = config.getBoolean("enable.anticasespam");
+		String message = event.getMessage();
+		if (!(Main.chatHoldOn(player, "")) && enablation && (getUpperCases(message) > getMaxUpperCases())) {
+			if (!(player.hasPermission("chatassets.anticasespam.bypass"))) {
+				if (autolowercase) {
+					event.setMessage(message.toLowerCase());
+					Main.sendMessage(ChatColor.YELLOW + "Your message is lower cased becuase the original amount of upper cased characters is beyond the maximum.", player);
+				} else {
+					event.setCancelled(true);
+					Main.sendMessage(ChatColor.YELLOW + "Your message is blocked becuase the original amount of upper cased characters is beyond the maximum.", player);
 				}
 			}
 		}
