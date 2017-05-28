@@ -1,6 +1,9 @@
 package me.rcextract.chatassets;
 
+<<<<<<< HEAD
 import org.bukkit.configuration.file.FileConfiguration;
+=======
+>>>>>>> b0e97d92901758e0d5600c2359a9c87798c93512
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

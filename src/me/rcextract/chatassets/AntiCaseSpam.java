@@ -11,11 +11,13 @@ public class AntiCaseSpam implements Listener {
 
 	//Plugin Instance
 	private static FileConfiguration config;
+
 	private static int maxUpperCases;
 	private static boolean autolowercase;
 
 	//Constructor
 	public AntiCaseSpam(Main main) {
+<<<<<<< HEAD
 		AntiCaseSpam.config = ConfigManager.getConfig();
 		maxUpperCases = config.getInt("anticasespam.max-upper-cases");
 		autolowercase = config.getBoolean("anticasespam.all-char-to-lower-case-if-over-max");
@@ -49,6 +51,7 @@ public class AntiCaseSpam implements Listener {
 	}
 	
 	public static void setAutoLowerCaseStatus(boolean status, boolean reload) {
+<<<<<<< HEAD
 		config.set("anticasespam.all-char-to-lower-case-if-over-max", status);
 		if (reload) {
 			ConfigManager.saveConfig();
@@ -59,6 +62,7 @@ public class AntiCaseSpam implements Listener {
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
+<<<<<<< HEAD
 		boolean enablation = config.getBoolean("enable.anticasespam");
 		String message = event.getMessage();
 		if (!(Main.chatHoldOn(player, "")) && enablation && (getUpperCases(message) > getMaxUpperCases())) {

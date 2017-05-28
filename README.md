@@ -9,6 +9,6 @@ The message shortener allows you to create keys that will be replaced with a cor
 ## ChatAutoModifier
 The chat auto modifier convinces the message sender from sending a correct formated message. It automatically adds spaces between each sentences: hi.bro. -> hi. bro. Also, if the message is not ended with a correct punctuation, it automatically adds: hi.bro -> hi. bro.
 ## Private Messanger
-The private messanger allows you to chat with a specific player privately without other players knowing.
+The private messanger allows you to chat with a specific player privately without other players knowing. To privately send a message, type "@<player_name> <message>" into the chat.
 ### Replier
-The replier will records actions between two players who are chatting under private messanger. You can do /reply <message> to reply to the player who has privately messaged you, or who you have privatly message to.
+The replier will records actions between two players who are chatting under private messanger.

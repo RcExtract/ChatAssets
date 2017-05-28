@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+<<<<<<< HEAD
 import org.bukkit.configuration.file.FileConfiguration;
+=======
+>>>>>>> b0e97d92901758e0d5600c2359a9c87798c93512
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,6 +28,7 @@ public class LogHandler implements Listener {
 	
 	//Constructor
 	public LogHandler(Main main) {
+<<<<<<< HEAD
 		LogHandler.config = ConfigManager.getConfig();
 		joinmessage = config.getStringList("loghandler.join-messages.message");
 		quitmessage = config.getStringList("loghandler.quit-messages.message");

@@ -14,6 +14,7 @@ public class AntiCurse implements Listener {
 
 	//Plugin Instance
 	private static FileConfiguration config;
+	
 	private static List<String> badwords;
 	private static boolean status;
 	//Constructor
