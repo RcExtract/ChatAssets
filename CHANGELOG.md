@@ -17,7 +17,7 @@ Fixed several bugs and changed config.yml settings.
   - Added choices to enable or disable certain functions.
 - Changed AntiCurse.java
   - Support replacing bad words that are not seperated with spaces.
-  - Older versions doesn't support "a<badword>b" replacement, only support "a <badword> b". Now supported.
+  - Older versions doesn't support "aBADWORDb" replacement, only support "a BADWORD b". Now supported.
   - Fixed bug that occured when two badwords are sticked together.
 ## Update 0.2.0
 AntiCaseSpam is added. Starts to depend on ActionBarAPI.
@@ -31,14 +31,14 @@ Message Shortener is added. Fixed several bugs and compabilities between each fu
 - Added MessageShortener.java
 - Added options for message shortener into config.yml
 - Added sub-command messageshortener.
-  - Added sub-sub-command add. Usage: /chatassets messageshortener add <key>.
+  - Added sub-sub-command add. Usage: /chatassets messageshortener add KEY.
   - Message can be typed not as an argument behind the key.
 ## Update 0.3.1
 Fixed several bugs and compabilities between each functions.
 ## Update 0.3.2
 Command for removing shorten messages is added.
 - Changed Commander.java
-  - Added sub-sub-command remove. Usage: /chatassets messageshortener remove <key>.
+  - Added sub-sub-command remove. Usage: /chatassets messageshortener remove KEY.
 ## Update 0.3.3
 Fixed several bugs and compabilities between each functions.
 ## Update 1.0
@@ -46,8 +46,8 @@ Added a lot of things, especially chat auto modifier, msg and reply.
 - Changed Main.java
   - Added support for color codes
 - Changed Command UI
-  - msg. Usage: /msg <player> <message>
-  - reply. Usage: /reply <message>
+  - msg. Usage: /msg PLAYER MESSAGE
+  - reply. Usage: /reply MESSAGE
     - msg command must be executed successfully before using this command before sender or receiver quitting.
 - Added ChatAutoModifier.java
   - Adds spaces between each sentences.
@@ -62,9 +62,10 @@ Added customization for message when a player joins or leaves the server, and mo
 - Added JoinHandler.java
   - Added customization for message when a player joins the server, and motd.
 - Added PlaceHolders
-  - <playername>: Player real name
-  - <displayname>: Displayed player name
-  - <onlineplayercount>: Total online players count
+  - PlaceHolders surrounded with arrow symbols.
+  - playername: Player real name
+  - displayname: Displayed player name
+  - onlineplayercount: Total online players count
   - These placeholders can only be used in this plugin.
   - This plugin will support PlaceHolderAPI, which means it is not supported currently.
 - Changed config.yml
@@ -95,8 +96,20 @@ Added customization for message when a player joins or leaves the server, and mo
     - total-messages
       - Total messages will be counted inside the plugin
 - Updated MessageShortener.java
-  - You should now type "@<player_name> <message>" to send a message privately
+  - You should now type "@PLAYER MESSAGE" to send a message privately
 ## Update 2.0.1
 - Fixed several bugs and compabilities between each functions.
 - Changed config.yml
   - You can now toggle the player join, leave, and motd messages modifications
+## Update 2.1.0
+- Improved configuration system
+- Changed config.yml
+  - Added options
+    - version
+      - Used to check updates for config.yml. **Do not change it.**
+- Added message-shortener.yml
+  - Brand new shorten message saving method
+    - Method: KEY: MESSAGE
+  - Added options
+    - version
+      - Used to check updates for message-shortener.uml **Do not change it**. It will not be considered as a shorten message.
