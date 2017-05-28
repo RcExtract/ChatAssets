@@ -5,10 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -102,15 +99,15 @@ public class ConfigManager {
 		}
 	}
 	public static void saveDefaultConfig() {
-		Reader reader = null;
+		InputStream reader = plugin.getResource("config.yml");
+		OutputStream output = null;
 		try {
-			reader = new InputStreamReader(plugin.getResource("config.yml"), "UTF8");
-		} catch (UnsupportedEncodingException e) {
+			output = new FileOutputStream(configfile);
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		config = YamlConfiguration.loadConfiguration(reader);
 		try {
-			getConfig().save(configfile);
+			ByteStreams.copy(reader, output);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

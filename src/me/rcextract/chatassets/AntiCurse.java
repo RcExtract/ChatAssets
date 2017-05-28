@@ -16,6 +16,7 @@ public class AntiCurse implements Listener {
 	private static FileConfiguration config;
 	private static List<String> badwords;
 	private static boolean status;
+	
 	//Constructor
 	public AntiCurse(Main main) {
 		AntiCurse.config = ConfigManager.getConfig();

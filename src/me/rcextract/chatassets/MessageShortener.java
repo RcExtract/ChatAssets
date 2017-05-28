@@ -9,6 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MessageShortener implements Listener {
 
@@ -90,5 +91,7 @@ public class MessageShortener implements Listener {
 				}
 			}
 		}
+		String output = String.join(" ", messagewords);
+		return output;
 	}
 }
