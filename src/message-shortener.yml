@@ -1,0 +1,5 @@
+# The option name is the key and the option value is the message.
+shortkey: longmessage
+
+# Do not change the version or the plugin breaks. This option will not be considered as a shorten message.
+version: 3

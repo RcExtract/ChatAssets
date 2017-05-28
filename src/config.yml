@@ -1,30 +1,64 @@
+# Added to the front of messages that are sent by plugin on the chat only.
 prefix: "ChatAssets "
+
+#Determine whether the plugin should send messages on the chat or action bar. Requires ActionBarAPI for any version of server if set to true.
 send-message-on-action-bar: true
+
+# Set what functions should be enabled. Set true to enable, false to disable. They will enable by default, except cooldowner.
 enable:
     anticurse: true
     anticasespam: true
-    cooldowner: true
     chatautomodifier: true
+    cooldowner: false
+    loghandler: true
+    private-messenger: true
+
 anticurse:
+    # Set whether should the cursed message be cancelled. Set true to block the message from being sent, false to replace the bad word with customized character.
     cancel-cursed-message: false
-    replaced-string: "*"
+    
+    # Used to replace the bad words. Unecessary if above is set to true.
+    replaced-char: "*"
+    
+    # Words blacklisted should be in the following list.
     badwords:
     - badword
+
 anticasespam:
+    # Maximum amount of upper cased letters allowed in a message.
     max-upper-cases: 3
+    
+    # Set whether if a message which breaks the rule should be cancelled. Set false to block the message from being sent, true to set all characters of it to lower case.
     all-char-to-lower-case-if-over-max: true
+    
+# Deprecated. This section makes no changes.
 cooldowner:
     secs-before-next-message: 5
-message-shortener:
-    totalmessages: 1
-    messages:
-        '1':
-            key: "shortkey"
-            message: "longmessage"
+
 loghandler:
-    join-message:
-    - "<playername> joined the game"
-    quit-message:
-    - "<playername> left the game"
+    join-messages:
+        # Toggle should this plugin overrides the vanilla player join broadcast message.
+        enable: true
+        
+        # The message broadcasted on player joins. Unecessary if above is set to false.
+        message:
+        - "<playername> joined the game"
+
+    quit-messages:
+        # Toggle should this plugin overrides the vanilla player quit broadcast message.
+        enable: true
+        
+        # The message broadcasted on player quits. Unecessary if above is set to false.
+        message:
+        - "<playername> left the game"
+
     motd:
-    - "This is a test motd!"
+        # Toggle should this plugin sends messages to the player just joined.
+        enable: true
+        
+        # The message sent on player joins. Unecessary if above is set to false.
+        message:
+        - "This is a test motd!"
+        
+#Do not change the version or the plugin breaks.
+version: 3
